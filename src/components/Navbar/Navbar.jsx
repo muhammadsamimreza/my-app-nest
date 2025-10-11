@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "../Container/Container";
+import { Link, NavLink } from "react-router";
 
 const Navbar = () => {
   return (
@@ -11,7 +12,7 @@ const Navbar = () => {
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-ghost lg:hidden"
+                className="p-1 mr-2 bg-gray-100 rounded-lg lg:hidden"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -34,51 +35,33 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
               >
                 <li>
-                  <a>Item 1</a>
+                  <NavLink to="/"> Home</NavLink>
                 </li>
                 <li>
-                  <a>Parent</a>
-                  <ul className="p-2">
-                    <li>
-                      <a>Submenu 1</a>
-                    </li>
-                    <li>
-                      <a>Submenu 2</a>
-                    </li>
-                  </ul>
+                  <NavLink to="/allapp"> Apps</NavLink>
                 </li>
                 <li>
-                  <a>Item 3</a>
+                  <NavLink to="/installation"> My Installation</NavLink>
                 </li>
               </ul>
             </div>
-            <a className="btn btn-ghost text-xl">daisyUI</a>
+            <Link to='/' className=" font-bold text-xl bg-[linear-gradient(125.07deg,_rgba(0,128,128,1),_rgba(60,179,113,1)_100%)] text-transparent bg-clip-text">My App Nest</Link>
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
               <li>
-                <a>Item 1</a>
+                <NavLink to="/"> Home</NavLink>
               </li>
               <li>
-                <details>
-                  <summary>Parent</summary>
-                  <ul className="p-2">
-                    <li>
-                      <a>Submenu 1</a>
-                    </li>
-                    <li>
-                      <a>Submenu 2</a>
-                    </li>
-                  </ul>
-                </details>
+                <NavLink to="/allapp"> Apps</NavLink>
               </li>
               <li>
-                <a>Item 3</a>
+                <NavLink to="/installation"> My Installation</NavLink>
               </li>
             </ul>
           </div>
           <div className="navbar-end">
-            <a className="btn">Button</a>
+            <a className="btn bg-[linear-gradient(125.07deg,_rgba(99,46,227,1),_rgba(159,98,242,1)_100%)]">Button</a>
           </div>
         </div>
       </Container>
