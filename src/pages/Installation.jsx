@@ -3,11 +3,18 @@ import Container from "../components/Container/Container";
 import useAppData from "../Hook/useAppData";
 import { getToLocalStorage } from "../Utilities/AddToLocalStorage";
 import InstalledAppCard from "./InstalledAppCard";
+import Loader from "../components/Loading/Loading";
 
 const Installation = () => {
   const { appData} = useAppData();
   const [installedApp, setInstalledApp] = useState([]);
-  
+  const [loading, setLoading] = useState(true)
+  useEffect(()=>{
+    const timer = setTimeout(()=>{
+      setLoading(false)
+    },300);
+    return ()=> clearTimeout(timer)
+  },[])
   useEffect(() => {
     const getData = getToLocalStorage();
     if (!getData) {
@@ -19,7 +26,7 @@ const Installation = () => {
       setInstalledApp(installedData);
     }
   }, [appData]);
-
+  if (loading) return <Loader></Loader>
   const handleRemovedApp = (id) => {
     const preData = getToLocalStorage(id);
     if (!preData) {

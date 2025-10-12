@@ -15,7 +15,7 @@ const AllApp = () => {
   useEffect(() => {
     const time = setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 300);
     return () => clearTimeout(time);
   }, []);
 
@@ -35,7 +35,7 @@ const AllApp = () => {
 
     const timer = setTimeout(() => {
       setSearchLoading(false);
-    }, 1000);
+    }, 300);
     setSearchTimer(timer);
   };
   return (
