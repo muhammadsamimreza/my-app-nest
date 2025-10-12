@@ -51,7 +51,7 @@ const AllApp = () => {
           </h1>
         </div>
         <div className="flex justify-between items-center my-10">
-          <h1>({filterdData.length}) App Found</h1>
+          <h1 className="text-xl font-bold">({filterdData.length}) App Found</h1>
           <div>
             <label className="input">
               <svg

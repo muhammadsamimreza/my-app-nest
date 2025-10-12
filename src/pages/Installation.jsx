@@ -4,17 +4,19 @@ import useAppData from "../Hook/useAppData";
 import { getToLocalStorage } from "../Utilities/AddToLocalStorage";
 import InstalledAppCard from "./InstalledAppCard";
 import Loader from "../components/Loading/Loading";
+import { Link } from "react-router";
 
 const Installation = () => {
-  const { appData} = useAppData();
+  const { appData } = useAppData();
   const [installedApp, setInstalledApp] = useState([]);
-  const [loading, setLoading] = useState(true)
-  useEffect(()=>{
-    const timer = setTimeout(()=>{
-      setLoading(false)
-    },300);
-    return ()=> clearTimeout(timer)
-  },[])
+  const [loading, setLoading] = useState(true);
+  const [sort, setSort] = useState('none')
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
   useEffect(() => {
     const getData = getToLocalStorage();
     if (!getData) {
@@ -26,7 +28,7 @@ const Installation = () => {
       setInstalledApp(installedData);
     }
   }, [appData]);
-  if (loading) return <Loader></Loader>
+  if (loading) return <Loader></Loader>;
   const handleRemovedApp = (id) => {
     const preData = getToLocalStorage(id);
     if (!preData) {
@@ -39,12 +41,44 @@ const Installation = () => {
     }
   };
 
+  const handleSortByHighLow = (type) =>{
+    setSort(type)
+  }
+  const handleSortByLowHigh = (type) =>{
+    setSort(type)
+  }
+
   return (
     <div>
       <Container>
+        <div className="flex justify-between items-center mt-10 mb-20">
+          <h1 className="text-xl font-bold">({installedApp.length}) Installed App</h1>
+          <div>
+            <div className="dropdown dropdown-bottom dropdown-center">
+              <div tabIndex={0} role="button" className="btn m-1">
+                Sort by: {sort} ⬇️ 
+              </div>
+              <ul
+                tabIndex="-1"
+                className="dropdown-content menu bg-base-100 w-36 rounded-box z-1 p-2 shadow-sm"
+              >
+                <li>
+                  <button onClick={()=> handleSortByHighLow('High>Low')}>{`High>Low`}</button>
+                </li>
+                <li>
+                  <button onClick={()=> handleSortByLowHigh('Low>High')}>{`Low>High`}</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
         {installedApp &&
           installedApp.map((app) => (
-            <InstalledAppCard key={app.id} app={app} handleRemovedApp={handleRemovedApp}></InstalledAppCard>
+            <InstalledAppCard
+              key={app.id}
+              app={app}
+              handleRemovedApp={handleRemovedApp}
+            ></InstalledAppCard>
           ))}
       </Container>
     </div>
