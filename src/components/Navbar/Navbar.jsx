@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "../Container/Container";
 import { Link, NavLink } from "react-router";
+import { FaGithubSquare } from "react-icons/fa";
 
 const Navbar = () => {
   return (
@@ -45,7 +46,12 @@ const Navbar = () => {
                 </li>
               </ul>
             </div>
-            <Link to='/' className=" font-bold text-xl bg-[linear-gradient(125.07deg,_rgba(0,128,128,1),_rgba(60,179,113,1)_100%)] text-transparent bg-clip-text">My App Nest</Link>
+            <Link
+              to="/"
+              className=" font-bold text-xl bg-[linear-gradient(125.07deg,_rgba(0,128,128,1),_rgba(60,179,113,1)_100%)] text-transparent bg-clip-text"
+            >
+              My App Nest
+            </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
@@ -61,7 +67,12 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="navbar-end">
-            <a className="btn bg-[linear-gradient(125.07deg,_rgba(99,46,227,1),_rgba(159,98,242,1)_100%)]">Button</a>
+            <Link
+              to="https://github.com/muhammadsamimreza"
+              className="btn bg-[linear-gradient(125.07deg,_rgba(0,128,128,1),_rgba(60,179,113,1)_100%)] text-white"
+            >
+              <span className="text-xl"><FaGithubSquare></FaGithubSquare></span><span>Contribute</span>
+            </Link>
           </div>
         </div>
       </Container>
