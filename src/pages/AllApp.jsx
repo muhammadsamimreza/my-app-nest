@@ -6,6 +6,7 @@ import AppCard from "./AppCard";
 
 const AllApp = () => {
   const {appData} = useAppData()
+  console.log(appData)
   return (
     <div>
       <Container>
