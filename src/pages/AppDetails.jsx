@@ -1,20 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import useAppData from '../Hook/useAppData'
 import Container from '../components/Container/Container';
 import { useParams } from 'react-router';
 import downlowdIcon from "../assets/icon-downloads.png"
 import ratingsIcon from "../assets/icon-ratings.png"
 import reviewIcon from "../assets/icon-review.png"
+import { addLocalStorage, getToLocalStorage } from '../Utilities/AddToLocalStorage';
 const AppDetails = () => {
    const {appData}= useAppData()
    const paramId = useParams()
    const appId = Number(paramId.appid)
+   const [install , setInstall] = useState(false)
+
+   useEffect(()=>{
+      const saveData = getToLocalStorage()
+      const includeData = saveData.map(Number).includes(appId)
+      setInstall(includeData)
+   },[appId])
    
    const findApp = appData.find(app=> app.id === appId) || {}
   
-   const {title,image,companyName,downloads,ratingAvg, reviews} = findApp
+   const {title,image,companyName,downloads,ratingAvg, reviews, id, size} = findApp
 
-   
+   const handleInstallation = (id) =>{
+      addLocalStorage(id)
+      setInstall(true)
+   }
 
   return (
     <div>
@@ -72,7 +83,10 @@ const AppDetails = () => {
                               </div>
                             </div>
                             <div>
-                             <button className='btn'>Install</button>
+                             <button disabled={install} onClick={()=>handleInstallation(id)} 
+                             className={`btn ${install ? "opacity-50 cursor-not-allowed" : "opacity-100"}`}>
+                              {install ? "Installed": `Installed Now (${size})` }
+                              </button>
                             </div>
                           </div>
                         </div>
