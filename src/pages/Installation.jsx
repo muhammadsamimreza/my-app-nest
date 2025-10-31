@@ -4,7 +4,7 @@ import useAppData from "../Hook/useAppData";
 import { getToLocalStorage } from "../Utilities/AddToLocalStorage";
 import InstalledAppCard from "./InstalledAppCard";
 import Loader from "../components/Loading/Loading";
-import { Link } from "react-router";
+
 
 const Installation = () => {
   const { appData } = useAppData();
@@ -43,14 +43,22 @@ const Installation = () => {
 
   const handleSortByHighLow = (type) =>{
     setSort(type)
+    if(type==="High>Low"){
+      const sortHighToLow = installedApp.sort((a,b)=> parseFloat(b.downloads)- parseFloat(a.downloads))
+      setInstalledApp(sortHighToLow)
+    }
   }
   const handleSortByLowHigh = (type) =>{
     setSort(type)
+    const sortLowToHigh = installedApp.sort((a,b)=> parseFloat(a.downloads)- parseFloat(b.downloads))
+      setInstalledApp(sortLowToHigh)
+    
   }
 
   return (
     <div>
       <Container>
+        <title>Nest title</title>
         <div className="flex justify-between items-center mt-10 mb-20">
           <h1 className="text-xl font-bold">({installedApp.length}) Installed App</h1>
           <div>
